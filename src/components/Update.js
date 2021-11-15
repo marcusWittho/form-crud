@@ -5,8 +5,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Update = () => {
-  const [firstName, setFirstName] = React.useState('');
-  const [lastName, setLastName] = React.useState('');
+  const [username, setUsername] = React.useState('');
+  const [email, setEmail] = React.useState('');
   const [checkbox, setCheckbox] = React.useState(false);
   const [id, setId] = React.useState(null);
 
@@ -15,8 +15,8 @@ const Update = () => {
 
   const updateData = () => {
     axios.put(`https://6191338a41928b001768ffa1.mockapi.io/mockData/${id}`,{
-      firstName,
-      lastName,
+      username,
+      email,
       checkbox
     }).then(
       () => navigate("/read")
@@ -25,8 +25,8 @@ const Update = () => {
 
   React.useEffect(() => {
     setId(dataClients.id);
-    setFirstName(dataClients.firstName);
-    setLastName(dataClients.lastName);
+    setUsername(dataClients.username);
+    setEmail(dataClients.email);
     setCheckbox(dataClients.checkbox);
   }, [dataClients]);
 
@@ -36,8 +36,8 @@ const Update = () => {
         <label>First Name</label>
         <input
           placeholder='First Name'
-          onChange={ ({ target }) => setFirstName(target.value) }
-          value={ firstName }
+          onChange={ ({ target }) => setUsername(target.value) }
+          value={ username }
         />
       </Form.Field>
 
@@ -45,8 +45,8 @@ const Update = () => {
         <label>Last Name</label>
         <input
           placeholder='Last Name'
-          onChange={ ({ target }) => setLastName(target.value) }
-          value={ lastName }
+          onChange={ ({ target }) => setEmail(target.value) }
+          value={ email }
         />
       </Form.Field>
 

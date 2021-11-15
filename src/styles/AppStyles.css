@@ -10,6 +10,10 @@
   flex-direction: column;
 }
 
+input {
+  font-size: 1.4rem;
+}
+
 .main-header {
   font-family: 'Montserra', sans-serif;
   color: #aa33b5;
@@ -26,10 +30,11 @@
   color: whitesmoke !important;
   font-family: 'Montserrat', sans-serif;
   font-size: 12px !important;
+  width: 30vw;
 }
 
 .table {
-  width: 30vw;
+  width: 50vw;
 }
 
 .animaleft {
@@ -56,4 +61,18 @@
     opacity:initial;
     transform: initial;
   }
+}
+
+button {
+  border: none;
+  border-radius: 7px;
+  padding: 9px 12px;
+}
+
+.btnUpdate:hover {
+  background: linear-gradient(to top, #00f 0%, rgba(0, 0, 0, 0.1) 25%);
+}
+
+.btnDelete:hover {
+  background: linear-gradient(to top, #f00 0%, rgba(0, 0, 0, 0.1) 25%);
 }

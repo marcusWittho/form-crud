@@ -4,39 +4,85 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Create = () => {
-  const [firstName, setFirstName] = React.useState('');
-  const [lastName, setLastName] = React.useState('');
+  const [username, setUsername] = React.useState('');
+  const [email, setEmail] = React.useState('');
   const [checkbox, setCheckbox] = React.useState(false);
+  const [btnEnabled, setBtnEnabled] = React.useState(true);
+  const [errorName, setErrorName] = React.useState(false);
+  const [errorEmail, setErrorEmail] = React.useState(false);
 
   let navigate = useNavigate();
 
   const postData = () => {
     axios.post('https://6191338a41928b001768ffa1.mockapi.io/mockData',{
-      firstName,
-      lastName,
+      username,
+      email,
       checkbox
     }).then(
       () => navigate("/read")
     );
   }
 
+  const handleErrors = () => {
+    if (!errorName && !errorEmail) {
+      setBtnEnabled(false);
+    } else {
+      setBtnEnabled(true);
+    }
+  }
+
+  const handleBlurUsername = ({ target }) => {
+    if (!target.value) {
+      setErrorName(true);
+    } else {
+      setErrorName(false);
+    };
+  }
+
+  const handleChangeUsername = ({ target }) => {
+    setErrorName(false);
+    setUsername(target.value);
+  }
+
+  const validateEmail = (value) => {
+    const emailRegex = /^[\w.]*[0-9]*@[\w]*\.[\w]{2,3}$/;
+    if (emailRegex.test(value) || value === null) {
+      setErrorEmail(false);
+      setEmail(value);
+    } else {
+      setErrorEmail(true);
+      setBtnEnabled(true)
+    }
+  }
+
+  const handleChangeEmail = ({ target }) => {
+    validateEmail(target.value);
+    handleErrors();
+  }
+
   return (
     <div className="animaright">
       <Form className="create-form">
         <Form.Field>
-          <label>First Name</label>
+          <label>Username</label>
           <input
-            placeholder='First Name'
-            onChange={ ({ target }) => setFirstName(target.value) }
+            type="text"
+            placeholder='Username'
+            onBlur={ handleBlurUsername }
+            onChange={ handleChangeUsername }
           />
+          { errorName && <p className="error">Preencha o campo username.</p> }
         </Form.Field>
 
         <Form.Field>
-          <label>Last Name</label>
+          <label>E-mail</label>
           <input
-            placeholder='Last Name'
-            onChange={ ({ target }) => setLastName(target.value) }
+            type="email"
+            placeholder='email@email.com'
+            onBlur={ ({ target }) => validateEmail(target.value) }
+            onChange={ handleChangeEmail }
           />
+          { errorEmail && <p className="error">Preencha corretamente o campo e-mail</p> }
         </Form.Field>
 
         <Form.Field>
@@ -49,6 +95,7 @@ const Create = () => {
         <Button
           type='submit'
           onClick={ postData }
+          disabled={ btnEnabled }
         >
           Submit
         </Button>

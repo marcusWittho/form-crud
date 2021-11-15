@@ -5,21 +5,19 @@ const slice = createSlice({
 
   initialState: {
     id: '',
-    firstName: '',
-    lastName: '',
+    uername: '',
+    email: '',
     checkbox: false,
   },
 
   reducers: {
     setClient(state, action) {
-      let { id, firstName, lastName, checkbox } = action.payload;
+      let { id, username, email, checkbox } = action.payload;
 
       state.id = id;
-      state.firstName = firstName;
-      state.lastName = lastName;
+      state.username = username;
+      state.email = email;
       state.checkbox = checkbox;
-
-      console.log(state)
     }
   },
 });

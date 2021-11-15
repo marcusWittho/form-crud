@@ -29,8 +29,8 @@ const Read = () => {
       <Table singleLine className="animaright">
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>First Name</Table.HeaderCell>
-            <Table.HeaderCell>Last Name</Table.HeaderCell>
+            <Table.HeaderCell>Username</Table.HeaderCell>
+            <Table.HeaderCell>E-mail</Table.HeaderCell>
             <Table.HeaderCell>Checked</Table.HeaderCell>
             <Table.HeaderCell>Update</Table.HeaderCell>
             <Table.HeaderCell>Delete</Table.HeaderCell>
@@ -40,12 +40,13 @@ const Read = () => {
         <Table.Body>
           {data.map((user, index) => (
             <Table.Row key={ index }>
-              <Table.Cell>{ user.firstName }</Table.Cell>
-              <Table.Cell>{ user.lastName }</Table.Cell>
+              <Table.Cell>{ user.username }</Table.Cell>
+              <Table.Cell>{ user.email }</Table.Cell>
               <Table.Cell>{ (user.checkbox) ? 'Checked' : 'Unchecked' }</Table.Cell>
                 <Table.Cell>
                   <Link to="/update">
                     <button
+                      className="btnUpdate"
                       onClick={ () => dispatch(setClient(user)) }
                     >
                       Update
@@ -54,6 +55,7 @@ const Read = () => {
                 </Table.Cell>
               <Table.Cell>
                 <button
+                  className="btnDelete"
                   onClick={ () => handleDelete(user.id) }
                 >
                   Deletar
